@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Graphite · 函数绘制器</title>
+<link rel="stylesheet" href="./assets/graphite.css">
+</head>
+<body>
+<div id="entry-screen">
+<header><div class="wrap brand"><span class="mark" aria-hidden="true">ƒ</span> Graphite</div></header>
+<main class="wrap">
+<div class="eyebrow">GRAPHITE / FUNCTION PLOTTER</div>
+<h1>函数绘制器</h1>
+<p class="intro">从一行表达式开始，在坐标系里观察它的形状。</p>
+<form id="form" class="panel">
+<label for="input">函数表达式</label>
+<div class="entry">
+<div class="entry-fields">
+<textarea id="input" rows="2" spellcheck="false" autocomplete="off" placeholder="例如 y = sin(x)"></textarea>
+<div id="math-keys" class="math-keys" role="group" aria-label="数学输入按键" aria-controls="input">
+<button type="button" data-insert="x">x</button>
+<button type="button" data-insert="y">y</button>
+<button type="button" data-insert="t">t</button>
+<button type="button" data-insert="π" aria-label="圆周率 π">π</button>
+<button type="button" data-insert="e">e</button>
+<button type="button" data-insert="=" aria-label="等号">=</button>
+<button type="button" data-insert="+" aria-label="加号">+</button>
+<button type="button" data-insert="−" aria-label="减号">−</button>
+<button type="button" data-insert="×" aria-label="乘号">×</button>
+<button type="button" data-insert="÷" aria-label="除号">÷</button>
+<button type="button" data-insert="^" aria-label="乘方">^</button>
+<button type="button" data-insert="²" aria-label="平方">x²</button>
+<button type="button" data-insert="(" data-close=")" aria-label="圆括号">()</button>
+<button type="button" data-insert="[" data-close="]" aria-label="方括号">[]</button>
+<button type="button" data-insert="," aria-label="逗号">,</button>
+<button type="button" data-insert=";" aria-label="分号">;</button>
+<button type="button" data-insert="@" aria-label="指定区间符号">@</button>
+<button type="button" data-insert="." aria-label="小数点">.</button>
+<button type="button" data-insert="√(" data-close=")" aria-label="平方根">√</button>
+<button type="button" data-insert="|" data-close="|" aria-label="绝对值">|x|</button>
+<button type="button" data-insert="sin(" data-close=")" aria-label="正弦 sin">sin</button>
+<button type="button" data-insert="cos(" data-close=")" aria-label="余弦 cos">cos</button>
+<button type="button" data-insert="tan(" data-close=")" aria-label="正切 tan">tan</button>
+<button type="button" data-insert="ln(" data-close=")" aria-label="自然对数 ln">ln</button>
+<button type="button" data-insert="log(" data-close=")" aria-label="对数 log">log</button>
+<button type="button" data-insert="log₂(" data-close=")" aria-label="以 2 为底的对数">log₂</button>
+<button type="button" data-insert="log₁₀(" data-close=")" aria-label="以 10 为底的对数">log₁₀</button>
+<button type="button" data-insert="³" aria-label="立方">x³</button>
+<button type="button" data-move="-1" aria-label="光标左移">←</button>
+<button type="button" data-move="1" aria-label="光标右移">→</button>
+<button type="button" data-insert="&#10;" aria-label="换行">↵</button>
+<button type="button" data-delete aria-label="删除前一个字符或选中内容">⌫</button>
+</div>
+</div>
+<button id="draw" class="primary">绘制曲线 →</button>
+</div>
+<div class="samples"><span>试试</span><button type="button" data-example="y = sin(x)">sin(x)</button><button type="button" data-example="y = x^2">抛物线</button><button type="button" data-example="x^2 + y^2 = 9">隐式圆</button><button type="button" data-example="x = 3*cos(t); y = 2*sin(t)">参数椭圆</button></div>
+<p class="hint" id="syntax">每行一条曲线。显函数可用 @ 指定区间，例如 y=x² @ [-2, 2]。参数曲线默认 t ∈ [0, 2π]。支持 |x|、π、三角函数，以及 ln(x)、log₂(x)、log₁₀(x) 和 log(x, 底数)。</p>
+<p id="status" class="status" role="status"></p>
+<div id="saved-curves" class="saved-curves" hidden>
+<span id="saved-count" role="status"></span><button id="clear-curves" type="button">清空曲线</button>
+</div>
+</form>
+</main>
+</div>
+<section id="graph" class="panel graph" aria-label="绘图区" hidden>
+<div class="bar"><div><button type="button" id="back">‹ 返回输入</button><strong>直角坐标系</strong></div><div class="tools">
+<button type="button" id="out" aria-label="缩小">−</button><button type="button" id="in" aria-label="放大">+</button><button type="button" id="reset">复位</button><button type="button" id="replay">重播</button><button type="button" id="export">导出 SVG</button>
+</div></div>
+<div class="plot-area">
+<svg id="plot" xmlns="http://www.w3.org/2000/svg" role="img" tabindex="0" aria-label="函数图像。可用方向键平移，使用加号和减号缩放。"></svg>
+<p id="plot-status" class="plot-status" role="status"></p>
+</div>
+<div id="legend" class="legend" aria-label="曲线图例"></div>
+</section>
+<script src="./assets/heart-sticker.js"></script>
+<script src="./assets/graphite.js"></script>
+</body>
+</html>
